@@ -1,0 +1,44 @@
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="left-container">
+    <div class="company-name">ProdSync</div>
+    <button class="add-product-btn" (click)="navigateToCreate()">+ Add Product</button>
+  </div>
+</nav>
+
+<!-- Product List -->
+<div class="container">
+  <h2>Product List</h2>
+
+  <!-- Show message if no products exist -->
+  <div *ngIf="products && products.length === 0" class="no-products-message">
+    No products available.
+  </div>
+
+  <!-- Display table only if products exist -->
+  <table *ngIf="products && products.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product?.productid }}</td>
+        <td>{{ product?.productname }}</td>
+        <td>{{ product?.description }}</td>
+        <td>{{ product?.price }}</td>
+        <td>{{ product?.quantity }}</td>
+        <td class="action-column">
+          <button *ngIf="product?.productid !== undefined" class="edit-btn" (click)="editProduct(product.productid)">Edit</button>
+          <button *ngIf="product?.productid !== undefined" class="delete-btn" (click)="deleteProduct(product.productid)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
